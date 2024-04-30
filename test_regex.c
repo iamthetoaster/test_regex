@@ -33,6 +33,8 @@ void __debug_logging_function(
 void display_match(regex_t regex, size_t nmatch, regmatch_t pmatch[], char *s);
 
 int main(int argc_i, char **argv) {
+    // TODO Proper erroring
+    // Also tell users how to use the program
     size_t argc = argc_i;
     regex_t regex;
     if (regcomp(&regex, argv[1], REG_EXTENDED | REG_NEWLINE)) {
@@ -76,7 +78,7 @@ void display_match(regex_t regex, size_t nmatch, regmatch_t pmatch[], char *s) {
     pmatch[0].rm_so = entire.rm_eo;
     pmatch[0].rm_eo = entire.rm_so;
     printf("%s", RESET);
-    printf("%.*s", entire.rm_so, s);
+    printf("%.*s", (int) entire.rm_so, s);
     size_t curr_index = 0;
     // while (curr_index > 0 && pmatch[curr_index].rm_so == -1) {
     //     curr_index--;
